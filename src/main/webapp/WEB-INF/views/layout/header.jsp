@@ -23,7 +23,7 @@
             </li>
             <c:if test="${not empty principal}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/login">당첨내역</a>
+                    <a class="nav-link" href="#">당첨내역</a>
                 </li>
             </c:if>
             <c:if test="${empty principal}">
@@ -33,8 +33,13 @@
             </c:if>
 
             <li class="nav-item">
-                <a class="nav-link" href="/record">게임 결과</a>
+                <a class="nav-link" href="#">게임 결과</a>
             </li>
+            <c:if test="${principal.user.role eq 'ADMIN'}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">관리자페이지</a>
+                </li>
+            </c:if>
         </ul>
     </nav>
 

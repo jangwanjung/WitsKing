@@ -62,7 +62,11 @@ public class PrincipalDetail implements UserDetails {
     //계정이 갖고있는 권한 목록을 리턴한다.(원래는 권한이여러개있을수있으므로 for문을돌리지만 우리는하나만하겠다)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> collectors = new ArrayList<>();
+
+        collectors.add(()->{return "ROLE_"+user.getRole();}); //람다식으로 표현한다 GrantedAuthority에는 한개의 메소드밖께없어서
+        //자바에서 알잘딱깔센으로 해준다
+        return collectors;
     }
 
 

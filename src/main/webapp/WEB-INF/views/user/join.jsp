@@ -24,7 +24,7 @@
         <form action="/user/join" method="post">
             <div class="form-group">
                 <label for="email">고유ID</label>
-                <input type="email" value="${kakaoUser.username}" name="username" class="form-control" id="email"  placeholder="m@example.com" readonly>
+                <input type="email" value="${username}" name="username" class="form-control" id="email"  placeholder="m@example.com" readonly>
             </div>
             <div class="form-group">
                 <label  >닉네임</label>

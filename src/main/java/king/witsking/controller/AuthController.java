@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import king.witsking.config.auth.PrincipalDetail;
 import king.witsking.model.KakaoOAuthToken;
 import king.witsking.model.KakaoProfile;
+import king.witsking.model.RoleType;
 import king.witsking.model.User;
 import king.witsking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,6 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
-    @Value("${password}")
-    private String password;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -97,17 +95,13 @@ public class AuthController {
         }
         String username = kakaoProfile.getProperties().getNickname()+"_"+kakaoProfile.getId();
 
-
-        User kakaoUser = User.builder()
-                .username(username)
-                .build();
-        boolean exist = userService.findUser(kakaoUser.getUsername());  //존재하면 exist == ture 없으면 ==false
+        boolean exist = userService.findUser(username);  //존재하면 exist == ture 없으면 ==false
         if(exist == false) {
-            model.addAttribute("kakaoUser",kakaoUser);
+            model.addAttribute("username",username);
             System.out.println("못찾음");
             return "user/join";
         }
         userService.sessionSave(username);
-        return "index";
+        return "redirect:/";
     }
 }

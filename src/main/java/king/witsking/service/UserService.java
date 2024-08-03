@@ -1,9 +1,11 @@
 package king.witsking.service;
 
 import king.witsking.config.auth.PrincipalDetail;
+import king.witsking.model.RoleType;
 import king.witsking.model.User;
 import king.witsking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,13 +43,27 @@ public class UserService {
         }
 
     }
+    @Value("${adminKey}")
+    private String adminKey;
+
     @Transactional
     public void saveUser(String username,String nickname){
-        User user = User.builder()
-                .username(username)
-                .nickname(nickname)
-                .build();
-        userRepository.save(user);
+        if(nickname.equals(adminKey)){
+            User user = User.builder()
+                    .username(username)
+                    .nickname("admin")
+                    .role(RoleType.ADMIN)
+                    .build();
+            userRepository.save(user);
+        }
+        else{
+            User user = User.builder()
+                    .username(username)
+                    .nickname(nickname)
+                    .role(RoleType.USER)
+                    .build();
+            userRepository.save(user);
+        }
 
     }
 
@@ -57,8 +73,10 @@ public class UserService {
             return new IllegalArgumentException("해당유저를 찾을수없습니다");
         });
         PrincipalDetail updatedPrincipalDetail = new PrincipalDetail(user);
+
         // 새로운 Authentication 객체 생성
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(user.getUsername(), updatedPrincipalDetail);
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(updatedPrincipalDetail, updatedPrincipalDetail.getUsername(), updatedPrincipalDetail.getAuthorities());
+
         // SecurityContextHolder에 새로운 Authentication 객체 설정
         SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
