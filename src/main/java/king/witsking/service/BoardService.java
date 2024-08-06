@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -54,9 +55,15 @@ public class BoardService {
         Info info = Info.builder()
                 .gameId(gameId)
                 .username(user.getUsername())
+                .nickname(user.getNickname())
                 .number(num)
                 .build();
         infoRepository.save(info);
+        Game game = gameRepository.findById(gameId).orElseThrow(()->{
+            return new IllegalArgumentException("게임을 찾을수없습니다");
+        });
+        game.setPeople(game.getPeople() + 1);
+
     }
 
     @Transactional
@@ -74,5 +81,32 @@ public class BoardService {
             cnt.add(참여자수(gameId));
         }
         return cnt;
+    }
+
+    @Transactional
+    public int[] 실시간참여자수(int gameId){
+        Game game = gameRepository.findById(gameId).orElseThrow(()->{
+            return new IllegalArgumentException("해당게임을 찾을수없습니다");
+        });
+        int [] arr  = new int [game.getScale()];
+
+        List<Info> infos = infoRepository.findByGameId(gameId);
+        for (Info info : infos) {
+            arr[info.getNumber()-1]++;
+
+        }
+        return arr;
+
+    }
+
+    @Transactional
+    public List<Info> 실시간참여자(int gameId){
+        Game game = gameRepository.findById(gameId).orElseThrow(()->{
+            return new IllegalArgumentException("해당게임을 찾을수없습니다");
+        });
+
+        List<Info> infos = infoRepository.findByGameId(gameId);
+        return infos;
+
     }
 }

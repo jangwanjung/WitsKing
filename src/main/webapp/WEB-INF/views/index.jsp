@@ -42,6 +42,7 @@
     .game-img img {
         max-height: 100%;
     }
+
 </style>
 
 
@@ -61,7 +62,9 @@
                     <div class="card-body">
                         <p class="game-title">눈치${game.scale}</p>
                         <p class="game-desc">상품:${game.giftname}</p>
-                        <p class="game-count">참여자 수: ${cnts[status.index]}</p> <!-- cnt 값을 가져옵니다 -->
+                        <span class="material-symbols-outlined">man</span>
+                        <span style="font-size: 25px">${game.people}/${game.scale}</span>
+                        <br>
                         <a href="/table/${game.id}" class="btn btn-dark">참여하기</a>
                     </div>
                 </div>

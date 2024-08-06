@@ -19,7 +19,6 @@
         border-radius: 5px;
     }
 </style>
-${cnt}
 
 <div class="container">
     <div class="grid-container">

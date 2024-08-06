@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,12 @@ public class Info {
 
     private String username;
 
+    private String nickname;
+
     private int number;
 
     private int gameId;
+
+    @CreationTimestamp
+    private Timestamp creatDate;
 }

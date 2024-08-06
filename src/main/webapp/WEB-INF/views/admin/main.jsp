@@ -46,7 +46,7 @@
     <h2>진행중인게임</h2>
     <div class="row">
         <!-- Game Card 1 -->
-        <c:forEach var="game" items="${games}">
+        <c:forEach var="game" items="${games}" varStatus="status">
             <div class="col-md-3 mb-4">
                 <div class="card game-card">
                     <div class="game-img">
@@ -55,6 +55,9 @@
                     <div class="card-body">
                         <p class="game-title">눈치${game.scale}</p>
                         <p class="game-desc">상품:${game.giftname}</p>
+                        <span class="material-symbols-outlined">man</span>
+                        <span style="font-size: 25px">${game.people}/${game.scale}</span>
+                        <br>
                         <a href="/admin/table/${game.id}" class="btn btn-dark">테이블보기</a>
                     </div>
                 </div>

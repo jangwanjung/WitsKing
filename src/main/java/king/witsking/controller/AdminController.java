@@ -18,6 +18,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminPage(Model model) {
         model.addAttribute("games",boardService.진행중인게임());
+        model.addAttribute("cnts",boardService.메인참여자수());
         return "admin/main";
     }
 
@@ -25,7 +26,8 @@ public class AdminController {
     @GetMapping("/admin/table/{id}")
     public String adminTable(Model model, @PathVariable int id) {
         model.addAttribute("game",boardService.게임(id));
-
+        model.addAttribute("usersCnt",boardService.실시간참여자수(id));
+        model.addAttribute("users",boardService.실시간참여자(id));
         return "admin/table";
     }
 

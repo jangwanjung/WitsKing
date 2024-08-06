@@ -18,15 +18,54 @@
         height: 50px;
         border-radius: 5px;
     }
+
+
 </style>
 
 <div class="container">
+
     <div class="grid-container">
-        ${game.info}
+
         <c:forEach var="i" begin="1" end="${game.scale}">
-            <div class="grid-item">${i}</div>
+            <c:if test="${usersCnt[i-1]>=1}">
+                <button style="background-color: darkgreen" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                <!-- The Modal -->
+                <div class="modal" id="myModal${i}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">${i}번을 선택한사람</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <c:forEach var="user" items="${users}">
+                                    <c:if test="${user.number==i}">
+                                        ${user.username}&nbsp;&nbsp;&nbsp;${user.nickname}&nbsp;&nbsp;&nbsp;${user.creatDate}
+                                        <br>
+                                    </c:if>
+                                </c:forEach>
+
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${usersCnt[i-1]==0}">
+                <div class="grid-item">${i}(${usersCnt[i-1]})</div>
+            </c:if>
         </c:forEach>
     </div>
 </div>
 </body>
+
 </html>
