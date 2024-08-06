@@ -51,7 +51,8 @@
     <h2 class="text-center mb-4">현재진행중인게임</h2>
     <div class="row">
         <!-- Game Card 1 -->
-        <c:forEach var="game" items="${gameList}">
+
+        <c:forEach var="game" items="${games}" varStatus="status">
             <div class="col-md-3 mb-4">
                 <div class="card game-card">
                     <div class="game-img">
@@ -60,7 +61,8 @@
                     <div class="card-body">
                         <p class="game-title">눈치${game.scale}</p>
                         <p class="game-desc">상품:${game.giftname}</p>
-                        <a href="#" class="btn btn-dark">참여하기</a>
+                        <p class="game-count">참여자 수: ${cnts[status.index]}</p> <!-- cnt 값을 가져옵니다 -->
+                        <a href="/table/${game.id}" class="btn btn-dark">참여하기</a>
                     </div>
                 </div>
             </div>

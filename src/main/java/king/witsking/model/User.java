@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,6 +23,10 @@ public class User {
     private String username;
 
     private String nickname;
+
+    @OneToOne
+    @JoinColumn(name = "present_id")
+    private Present present;
 
     @CreationTimestamp
     private Timestamp creatDate;

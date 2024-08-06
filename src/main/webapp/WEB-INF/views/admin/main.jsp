@@ -1,7 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
+<style>
+    .game-card {
+        background-color: #fff;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+    .game-card:hover {
+        transform: translateY(-5px);
+    }
+    .game-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .game-desc {
+        color: #6c757d;
+    }
+    .game-img {
+        height: 200px;
+        background-color: #f1f1f1;
+        border-radius: 8px 8px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .game-img img {
+        max-height: 100%;
+    }
+</style>
 <div class="container">
-    <h1>게임생성</h1>
+    <br>
+    <h2>게임생성</h2>
     <form action="/admin/makegame" method="post">
         <input type="text" class="form-control" name="scale" placeholder="정원수">
         <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" name="giftName" placeholder="상품이름">
@@ -11,6 +42,25 @@
         </div>
         <button style="margin-top: 10px" type="submit" class="btn btn-dark btn-block">게임생성</button>
     </form>
+    <br>
+    <h2>진행중인게임</h2>
+    <div class="row">
+        <!-- Game Card 1 -->
+        <c:forEach var="game" items="${games}">
+            <div class="col-md-3 mb-4">
+                <div class="card game-card">
+                    <div class="game-img">
+                        <img src="/image/${game.giftphoto}" alt="상품사진" style="width: 250px; height: 200px; object-fit: contain;"/>
+                    </div>
+                    <div class="card-body">
+                        <p class="game-title">눈치${game.scale}</p>
+                        <p class="game-desc">상품:${game.giftname}</p>
+                        <a href="/admin/table/${game.id}" class="btn btn-dark">테이블보기</a>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
 </div>
 
 <script>
