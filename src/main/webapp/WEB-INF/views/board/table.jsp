@@ -30,10 +30,11 @@
 </body>
 <script>
     function select(num){
+        console.log(num);
         if(!confirm(num+"번으로 선택하시겠습니까?")){
             return false;
         }
-        if(!"${principal}"){
+        if("${principal}"===""){
             alert("로그인 하세요")
             return false;
         }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="layout/header.jsp"%>
+<%@ include file="../layout/header.jsp"%>
 <body>
 <style>
     body {
@@ -48,13 +48,12 @@
 
 <!-- Main Content -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">눈치왕</h2>
-    <h2 class="text-center mb-4">현재진행중인게임</h2>
+    <h2 class="text-center mb-4">게임 진행 결과</h2>
     <div class="row">
         <!-- Game Card 1 -->
 
         <c:forEach var="game" items="${games}" varStatus="status">
-            <c:if test="${game.play==false}">
+            <c:if test="${game.play==true}">
                 <div class="col-md-3 mb-4">
                     <div class="card game-card">
                         <div class="game-img">
@@ -66,7 +65,7 @@
                             <span class="material-symbols-outlined">man</span>
                             <span style="font-size: 25px">${game.people}/${game.scale}</span>
                             <br>
-                            <a href="/table/${game.id}" class="btn btn-dark">참여하기</a>
+                            <a href="/history/table/${game.id}" class="btn btn-dark">결과보기</a>
                         </div>
                     </div>
                 </div>
@@ -78,5 +77,5 @@
     </div>
 </div>
 </body>
-<%@ include file="layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>
 </html>

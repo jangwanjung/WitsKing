@@ -30,9 +30,7 @@ public class Game {
 
     private boolean play;
 
-    @OneToOne
-    @JoinColumn(name = "winner_username")
-    private User winner;
+    private String winner;
 
     @CreationTimestamp
     private Timestamp creatDate;

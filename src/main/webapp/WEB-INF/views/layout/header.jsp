@@ -34,7 +34,7 @@
             </c:if>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">게임 결과</a>
+                <a class="nav-link" href="/history">게임 결과</a>
             </li>
             <c:if test="${principal.user.role eq 'ADMIN'}">
                 <li class="nav-item">
