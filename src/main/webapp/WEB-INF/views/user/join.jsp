@@ -21,19 +21,28 @@
 <div class="container login-container">
     <div class="login-form">
         <h2 class="mb-4">회원가입</h2>
-        <form action="/user/join" method="post">
+        <form action="/user/join" id="joinForm" method="post">
             <div class="form-group">
                 <label for="email">고유ID</label>
                 <input type="email" value="${username}" name="username" class="form-control" id="email"  placeholder="m@example.com" readonly>
             </div>
             <div class="form-group">
                 <label  >닉네임</label>
-                <input type="text" class="form-control" name="nickname">
+                <input type="text" class="form-control" id="nickname" name="nickname" oninput="validateForm()">
             </div>
-            <button type="submit" class="btn btn-dark btn-block">회원가입</button>
+            <button type="submit" id="btn-save" class="btn btn-dark btn-block" disabled>회원가입</button>
         </form>
     </div>
 </div>
 </body>
 <%@ include file="../layout/footer.jsp"%>
 </html>
+<script>
+    function validateForm() {
+
+        var nickname = document.getElementById("nickname").value;
+        var btnSave = document.getElementById("btn-save");
+        btnSave.disabled = nickname.trim() === "";
+    }
+</script>
+

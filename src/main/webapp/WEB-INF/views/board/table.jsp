@@ -39,18 +39,34 @@
             return false;
         }
         $.ajax({
-            url: "/board/table",
+            url: "/check/duplication",
             type: "POST",
             data: {
-                num : num,
                 gameId : ${game.id},
                 userId : ${principal.user.id}
+            },
+            success:function (data){
+                if(data == true){
+                    $.ajax({
+                        url: "/board/table",
+                        type: "POST",
+                        data: {
+                            num : num,
+                            gameId : ${game.id},
+                            userId : ${principal.user.id}
+                        }
+                    }).done(function (resp){
+                        alert("성공하였습니다");
+                    }).fail(function (resp){
+                        alert("실패하였습니다");
+                    });
+                }
+                else{
+                    alert("이미 선택했습니다")
+                }
             }
-        }).done(function (resp){
-            alert("성공하였습니다");
-        }).fail(function (resp){
-            alert("실패하였습니다");
-        });
+        })
+
     }
 </script>
 </html>

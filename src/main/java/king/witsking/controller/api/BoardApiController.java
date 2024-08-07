@@ -29,4 +29,12 @@ public class BoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 
     }
+
+    @PostMapping("/check/duplication")
+    public boolean duplicationCheck(@RequestParam int gameId , @RequestParam int userId) {
+        System.out.println("gameId: " + gameId);
+        System.out.println("userId: " + userId);
+        return boardService.중복확인(gameId, userId);
+        //중복이있으면 false 없으면 true
+    }
 }

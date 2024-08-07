@@ -30,15 +30,12 @@ public class UserService {
     @Transactional
     public boolean findUser(String username){
         User user = userRepository.findByUsername(username).orElse(null);
-        System.out.println(333333333);
         //만약 없으면
         if (user == null){
-            System.out.println(1111111);
             return false;
         }
         //만약 존재하면
         else {
-            System.out.println(222222);
             return true;
         }
 
