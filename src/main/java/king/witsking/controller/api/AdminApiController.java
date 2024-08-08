@@ -26,4 +26,10 @@ public class AdminApiController {
         return "redirect:/";
 
     }
+
+    @PostMapping("/admin/sendgift")
+    public String sendGift(String username, String giftName, String giftPhoto){
+        adminService.상품보내기(username, giftName, giftPhoto);
+        return "redirect:/";
+    }
 }

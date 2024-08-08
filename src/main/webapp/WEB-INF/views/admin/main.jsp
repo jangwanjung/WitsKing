@@ -33,15 +33,15 @@
 <div class="container">
     <br>
     <h2>게임생성</h2>
-    <form action="/admin/makegame" method="post">
-        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" name="title" placeholder="제목">
-        <input type="text" class="form-control" name="scale" placeholder="정원수">
-        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" name="giftName" placeholder="상품이름">
+    <form action="/admin/makegame" method="post" id="gameForm">
+        <input style="margin-top: 10px; margin-bottom: 10px;" type="text" class="form-control" name="title" placeholder="제목" >
+        <input type="text" class="form-control" name="scale" id="scale" placeholder="정원수" required>
+        <input style="margin-top: 10px; margin-bottom: 10px;" type="text" class="form-control" name="giftName" placeholder="상품이름" required>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="giftPhoto" id="customFile">
+            <input type="file" class="custom-file-input" name="giftPhoto" id="customFile" required>
             <label class="custom-file-label" for="customFile">상품사진</label>
         </div>
-        <button style="margin-top: 10px" type="submit" class="btn btn-dark btn-block">게임생성</button>
+        <button style="margin-top: 10px;" id="btn-save" type="submit" class="btn btn-dark btn-block" disabled>게임생성</button>
     </form>
     <br>
 
@@ -77,8 +77,28 @@
 
 <script>
     // Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function() {
+    $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+
+    const form = document.getElementById('gameForm');
+    const button = document.getElementById('btn-save');
+
+    // 제목 필드를 제외한 필드 선택
+    const requiredInputs = form.querySelectorAll('input[required]');
+
+    requiredInputs.forEach(input => {
+        input.addEventListener('input', checkInputs);
+    });
+
+    function checkInputs() {
+        // 제목을 제외한 모든 필드가 채워졌는지 확인
+        const allFilled = Array.from(requiredInputs).every(input => input.value.trim() !== '');
+
+        // 버튼 활성화/비활성화
+        button.disabled = !allFilled;
+    }
+
 </script>

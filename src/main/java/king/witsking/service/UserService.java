@@ -1,8 +1,10 @@
 package king.witsking.service;
 
 import king.witsking.config.auth.PrincipalDetail;
+import king.witsking.model.Gift;
 import king.witsking.model.RoleType;
 import king.witsking.model.User;
+import king.witsking.repository.GiftRepository;
 import king.witsking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,12 +18,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private GiftRepository giftRepository;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -76,5 +81,11 @@ public class UserService {
 
         // SecurityContextHolder에 새로운 Authentication 객체 설정
         SecurityContextHolder.getContext().setAuthentication(newAuth);
+    }
+
+    @Transactional
+    public List<Gift> 선물내역(){
+        List<Gift> gifts = giftRepository.findAll();
+        return gifts;
     }
 }

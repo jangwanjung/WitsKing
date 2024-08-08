@@ -24,10 +24,6 @@ public class User {
 
     private String nickname;
 
-    @OneToOne
-    @JoinColumn(name = "present_id")
-    private Present present;
-
     @CreationTimestamp
     private Timestamp creatDate;
 

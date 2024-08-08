@@ -37,4 +37,5 @@ public class BoardApiController {
         return boardService.중복확인(gameId, userId);
         //중복이있으면 false 없으면 true
     }
+
 }

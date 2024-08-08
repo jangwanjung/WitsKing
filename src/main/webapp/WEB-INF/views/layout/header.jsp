@@ -24,7 +24,7 @@
             </li>
             <c:if test="${not empty principal}">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">당첨내역</a>
+                    <a class="nav-link" href="/gift">당첨내역</a>
                 </li>
             </c:if>
             <c:if test="${empty principal}">

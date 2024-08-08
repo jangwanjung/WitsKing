@@ -73,14 +73,14 @@
     </div>
     <br>
     <br>
-    <form action="/admin/sendgift" method="post">
-        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control"   value="${game.winner}" name="username" placeholder="받는사람">
-        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" value="${game.giftname}" name="giftName" placeholder="상품이름">
+    <form action="/admin/sendgift" method="post" id="giftForm">
+        <input style="margin-top: 10px; margin-bottom: 10px;" type="text" class="form-control" value="${game.winner}" name="username" placeholder="고유ID" required>
+        <input style="margin-top: 10px; margin-bottom: 10px;" type="text" class="form-control" value="${game.giftname}" name="giftName" placeholder="상품이름" required>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="giftPhoto" id="customFile">
+            <input type="file" class="custom-file-input" name="giftPhoto" id="customFile" required>
             <label class="custom-file-label" for="customFile">상품사진</label>
         </div>
-        <button style="margin-top: 10px" type="submit" class="btn btn-dark btn-block">상품보내기</button>
+        <button style="margin-top: 10px;" type="submit" class="btn btn-dark btn-block" id="btn-submit" disabled>상품보내기</button>
     </form>
 </div>
 </body>
@@ -92,4 +92,22 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    const form = document.getElementById('giftForm');
+    const button = document.getElementById('btn-submit');
+
+    // 모든 필드 선택 (필수 입력 필드)
+    const inputs = form.querySelectorAll('input[required]');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', checkInputs);
+    });
+
+    function checkInputs() {
+        // 모든 필드가 채워졌는지 확인
+        const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
+
+        // 버튼 활성화/비활성화
+        button.disabled = !allFilled;
+    }
 </script>
