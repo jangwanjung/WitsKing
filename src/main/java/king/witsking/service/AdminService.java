@@ -16,14 +16,16 @@ public class AdminService {
     @Autowired
     private InfoRepository infoRepository;
 
-    public void 게임생성(int scale, String giftName , String giftPhoto){
+    public void 게임생성(int scale, String giftName , String giftPhoto, String title){
         Game game = king.witsking.model.Game.builder()
+                .title(title)
                 .scale(scale)
                 .giftname(giftName)
                 .giftphoto(giftPhoto)
                 .play(false)
                 .build();
         gameRepository.save(game);
+
 
 
 

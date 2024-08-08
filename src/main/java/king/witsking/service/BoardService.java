@@ -125,6 +125,7 @@ public class BoardService {
                 }
             }
             game.setWinner(winnerUsername);
+            game.setWinnerNumber(winnerNum);
 
         }
         System.out.println("우승자: "+winnerUsername);

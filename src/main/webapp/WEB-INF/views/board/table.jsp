@@ -23,50 +23,14 @@
 <div class="container">
     <div class="grid-container">
         <c:forEach var="i" begin="1" end="${game.scale}">
-            <button type="submit"  class="grid-item" onclick="select(${i})">${i}</button>
+            <button type="submit"  class="grid-item" onclick="select(${i},${game.id},${principal.user.id})">${i}</button>
         </c:forEach>
     </div>
 </div>
 </body>
 <script>
-    function select(num){
-        console.log(num);
-        if(!confirm(num+"번으로 선택하시겠습니까?")){
-            return false;
-        }
-        if("${principal}"===""){
-            alert("로그인 하세요")
-            return false;
-        }
-        $.ajax({
-            url: "/check/duplication",
-            type: "POST",
-            data: {
-                gameId : ${game.id},
-                userId : ${principal.user.id}
-            },
-            success:function (data){
-                if(data == true){
-                    $.ajax({
-                        url: "/board/table",
-                        type: "POST",
-                        data: {
-                            num : num,
-                            gameId : ${game.id},
-                            userId : ${principal.user.id}
-                        }
-                    }).done(function (resp){
-                        alert("성공하였습니다");
-                    }).fail(function (resp){
-                        alert("실패하였습니다");
-                    });
-                }
-                else{
-                    alert("이미 선택했습니다")
-                }
-            }
-        })
-
-    }
+    var isPrincipalEmpty = "${principal}" === "";
+    var isGamePlay = "${game.play}" === "true";
 </script>
+<script  src="/js/board.js"></script>
 </html>

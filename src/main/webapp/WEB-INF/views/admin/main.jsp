@@ -34,6 +34,7 @@
     <br>
     <h2>게임생성</h2>
     <form action="/admin/makegame" method="post">
+        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" name="title" placeholder="제목">
         <input type="text" class="form-control" name="scale" placeholder="정원수">
         <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" name="giftName" placeholder="상품이름">
         <div class="custom-file">
@@ -43,7 +44,9 @@
         <button style="margin-top: 10px" type="submit" class="btn btn-dark btn-block">게임생성</button>
     </form>
     <br>
+
     <h2>진행중인게임</h2>
+    <br>
     <div class="row">
         <!-- Game Card 1 -->
         <c:forEach var="game" items="${games}" varStatus="status">
@@ -53,7 +56,13 @@
                         <img src="/image/${game.giftphoto}" alt="상품사진" style="width: 250px; height: 200px; object-fit: contain;"/>
                     </div>
                     <div class="card-body">
-                        <p class="game-title">눈치${game.scale}</p>
+                        <p class="game-title">${game.title}</p>
+                        <p class="game-title">
+                            눈치${game.scale}
+                            <c:if test="${game.play==true}">
+                                (마감)
+                            </c:if>
+                        </p>
                         <p class="game-desc">상품:${game.giftname}</p>
                         <span class="material-symbols-outlined">man</span>
                         <span style="font-size: 25px">${game.people}/${game.scale}</span>

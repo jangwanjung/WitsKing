@@ -16,9 +16,9 @@ public class AdminApiController {
     private AdminService adminService;
 
     @PostMapping("/admin/makegame")
-    public String makeGame(int scale,String giftName,String giftPhoto){
+    public String makeGame(int scale,String giftName,String giftPhoto ,String title){
 
-        adminService.게임생성(scale,giftName,giftPhoto);
+        adminService.게임생성(scale,giftName,giftPhoto,title);
         System.out.println(scale);
         System.out.println(giftName);
         System.out.println(giftPhoto);

@@ -28,7 +28,12 @@
 
         <c:forEach var="i" begin="1" end="${game.scale}">
             <c:if test="${usersCnt[i-1]>=1}">
-                <button style="background-color: darkgreen" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                <c:if test="${game.winnerNumber==i}">
+                    <button style="background-color: goldenrod" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                </c:if>
+                <c:if test="${game.winnerNumber!=i}">
+                    <button style="background-color: darkgreen" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                </c:if>
                 <!-- The Modal -->
                 <div class="modal" id="myModal${i}">
                     <div class="modal-dialog">

@@ -60,6 +60,7 @@
                             <img src="/image/${game.giftphoto}" alt="상품사진" style="width: 250px; height: 200px; object-fit: contain;"/>
                         </div>
                         <div class="card-body">
+                            <p class="game-title">${game.title}</p>
                             <p class="game-title">눈치${game.scale}</p>
                             <p class="game-desc">상품:${game.giftname}</p>
                             <span class="material-symbols-outlined">man</span>

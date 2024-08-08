@@ -28,7 +28,12 @@
 
         <c:forEach var="i" begin="1" end="${game.scale}">
             <c:if test="${usersCnt[i-1]>=1}">
-                <button style="background-color: darkgreen" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                <c:if test="${game.winnerNumber==i}">
+                    <button style="background-color: goldenrod" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                </c:if>
+                <c:if test="${game.winnerNumber!=i}">
+                    <button style="background-color: darkgreen" class="grid-item" data-toggle="modal" data-target="#myModal${i}" >${i}(${usersCnt[i-1]})</button>
+                </c:if>
                 <!-- The Modal -->
                 <div class="modal" id="myModal${i}">
                     <div class="modal-dialog">
@@ -64,8 +69,27 @@
                 <div class="grid-item">${i}(${usersCnt[i-1]})</div>
             </c:if>
         </c:forEach>
+
     </div>
+    <br>
+    <br>
+    <form action="/admin/sendgift" method="post">
+        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control"   value="${game.winner}" name="username" placeholder="받는사람">
+        <input style="margin-top: 10px;margin-bottom: 10px" type="text" class="form-control" value="${game.giftname}" name="giftName" placeholder="상품이름">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" name="giftPhoto" id="customFile">
+            <label class="custom-file-label" for="customFile">상품사진</label>
+        </div>
+        <button style="margin-top: 10px" type="submit" class="btn btn-dark btn-block">상품보내기</button>
+    </form>
 </div>
 </body>
 
 </html>
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

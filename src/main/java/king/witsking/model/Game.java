@@ -32,6 +32,10 @@ public class Game {
 
     private String winner;
 
+    private int winnerNumber;
+
+    private String title;
+
     @CreationTimestamp
     private Timestamp creatDate;
 }
